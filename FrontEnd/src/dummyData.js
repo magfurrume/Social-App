@@ -53,6 +53,11 @@ export const Users = [
         id: 11,
         profilePicture: "assets/person/debu.jpg",
         username: "Debashis Dutta"
+    },
+    {
+        id: 12,
+        profilePicture: "assets/person/lablu.jpg",
+        username: "Lablu Hasan"
     }
 ];
 
@@ -207,6 +212,15 @@ export const Posts = [
         photo: "assets/post/17.jpg",
         date: "19 mins ago",
         userId: 5,
+        like: 41,
+        comment: 9,
+    },
+    {
+        id: 18,
+        desc: "ছুয়ে দেখার পূর্ণতা",
+        photo: "assets/post/18.jpg",
+        date: "20h ago",
+        userId: 12,
         like: 41,
         comment: 9,
     }

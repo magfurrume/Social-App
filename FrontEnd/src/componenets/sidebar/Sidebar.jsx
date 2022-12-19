@@ -1,5 +1,7 @@
 import React from 'react';
 import './sidebar.css';
+import CloseFriends from '../closeFriends/CloseFriends';
+import { Users } from '../../dummyData';
 import { RssFeed, Chat, PlayCircleFilled, Group, Bookmarks, QuestionAnswerOutlined, Work, EmojiEvents, MenuBook } from '@material-ui/icons';
 
 
@@ -48,26 +50,13 @@ export default function Sidebar() {
                 <button className="sidebarButton">Show More</button>
                 <hr className="sidebarHr" />
                 <ul className="sidebarFriendList">
-                    <li className="sidebarFriend">
-                        <img src="/assets/person/ishmam.jpg" alt="" className="sidebarFriendImg" />
-                        <span className="sidebarFriendName">Ishmam</span>
-                    </li>
-                    <li className="sidebarFriend">
-                        <img src="/assets/person/rumee.jpg" alt="" className="sidebarFriendImg" />
-                        <span className="sidebarFriendName">Rume</span>
-                    </li>
-                    <li className="sidebarFriend">
-                        <img src="/assets/person/rume.png" alt="" className="sidebarFriendImg" />
-                        <span className="sidebarFriendName">Rayin</span>
-                    </li>
-                    <li className="sidebarFriend">
-                        <img src="/assets/person/rumee.jpg" alt="" className="sidebarFriendImg" />
-                        <span className="sidebarFriendName">Tanzeem</span>
-                    </li>
-                    <li className="sidebarFriend">
-                        <img src="/assets/person/rume.png" alt="" className="sidebarFriendImg" />
-                        <span className="sidebarFriendName">Hasan</span>
-                    </li>
+                    {
+                        Users.map(u => (
+
+                            <CloseFriends key={u.id} user={u} />
+                        ))
+                    }
+
                 </ul>
             </div>
         </div>

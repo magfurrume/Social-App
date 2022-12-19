@@ -1,5 +1,7 @@
 import React from 'react';
 import "./rightbar.css";
+import Online from '../online/Online';
+import { Users } from '../../dummyData';
 
 export default function Rightbar() {
   return (
@@ -12,87 +14,13 @@ export default function Rightbar() {
         <img className='rightbarAd' src="/assets/ad.jpg" alt="" />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer">
-              <img src="/assets/person/ishmam.jpg" alt="" className="rightProfileImg" />
-              <span className="rightbarOnline">
+          {
+            Users.map(u => (
 
-              </span>
-            </div>
-            <span className="rightbarUsername">Ishmam</span>
-          </li>
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer">
-              <img src="/assets/person/ishmam.jpg" alt="" className="rightProfileImg" />
-              <span className="rightbarOnline">
+              <Online key={u.id} user={u} />
+            ))
+          }
 
-              </span>
-            </div>
-            <span className="rightbarUsername">Ishmam</span>
-          </li>
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer">
-              <img src="/assets/person/ishmam.jpg" alt="" className="rightProfileImg" />
-              <span className="rightbarOnline">
-
-              </span>
-            </div>
-            <span className="rightbarUsername">Ishmam</span>
-          </li>
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer">
-              <img src="/assets/person/ishmam.jpg" alt="" className="rightProfileImg" />
-              <span className="rightbarOnline">
-
-              </span>
-            </div>
-            <span className="rightbarUsername">Ishmam</span>
-          </li>
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer">
-              <img src="/assets/person/ishmam.jpg" alt="" className="rightProfileImg" />
-              <span className="rightbarOnline">
-
-              </span>
-            </div>
-            <span className="rightbarUsername">Ishmam</span>
-          </li>
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer">
-              <img src="/assets/person/ishmam.jpg" alt="" className="rightProfileImg" />
-              <span className="rightbarOnline">
-
-              </span>
-            </div>
-            <span className="rightbarUsername">Ishmam</span>
-          </li>
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer">
-              <img src="/assets/person/ishmam.jpg" alt="" className="rightProfileImg" />
-              <span className="rightbarOnline">
-
-              </span>
-            </div>
-            <span className="rightbarUsername">Ishmam</span>
-          </li>
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer">
-              <img src="/assets/person/ishmam.jpg" alt="" className="rightProfileImg" />
-              <span className="rightbarOnline">
-
-              </span>
-            </div>
-            <span className="rightbarUsername">Ishmam</span>
-          </li>
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgContainer">
-              <img src="/assets/person/ishmam.jpg" alt="" className="rightProfileImg" />
-              <span className="rightbarOnline">
-
-              </span>
-            </div>
-            <span className="rightbarUsername">Ishmam</span>
-          </li>
         </ul>
       </div>
     </div>
