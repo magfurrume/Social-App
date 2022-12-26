@@ -4,6 +4,7 @@ import Online from '../online/Online';
 import { Users } from '../../dummyData';
 
 export default function Rightbar({ profile }) {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const HomeRightBar = () => {
     return (
@@ -12,7 +13,7 @@ export default function Rightbar({ profile }) {
           <img src="/assets/gift.png" alt="" className="birthdayImg" />
           <span className="birthdayText"><b>Ishmam</b> and <b>2 other friends</b> have birthday today</span>
         </div>
-        <img className='rightbarAd' src="/assets/ad.jpg" alt="" />
+        <img className='rightbarAd' src={`${PF}/ad.jpg`} alt="" />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
           {
@@ -50,28 +51,28 @@ export default function Rightbar({ profile }) {
         <h4 className="profileRightbarTitle">User Friends</h4>
         <div className="profileRightbarFollowings">
           <div className="profileRightbarFollowing">
-            <img src="/assets/person/amita.jpg" alt="" className="profileRightbarFollowingImg" />
+            <img src={`${PF}/person/amita.jpg`} alt="" className="profileRightbarFollowingImg" />
             <span className="profileRightbarFollowingUser">Amita</span>
           </div>
           <div className="profileRightbarFollowing">
-            <img src="/assets/person/ishmam.jpg" alt="" className="profileRightbarFollowingImg" />
+            <img src={`${PF}/person/ishmam.jpg`} alt="" className="profileRightbarFollowingImg" />
             <span className="profileRightbarFollowingUser">Ishmam</span>
           </div>
           <div className="profileRightbarFollowing">
-            <img src="/assets/person/rony.jpg" alt="" className="profileRightbarFollowingImg" />
+            <img src={`${PF}/person/rony.jpg`} alt="" className="profileRightbarFollowingImg" />
             <span className="profileRightbarFollowingUser">Mahfuz Rony</span>
           </div>
           <div className="profileRightbarFollowing">
-            <img src="/assets/person/nishat.jpg" alt="" className="profileRightbarFollowingImg" />
+            <img src={`${PF}/person/nishat.jpg`} alt="" className="profileRightbarFollowingImg" />
             <span className="profileRightbarFollowingUser">Abdullah Arif Nishat</span>
           </div>
           <div className="profileRightbarFollowing">
-            <img src="/assets/person/mahima.jpg" alt="" className="profileRightbarFollowingImg" />
+            <img src={`${PF}/person/mahima.jpg`} alt="" className="profileRightbarFollowingImg" />
             <span className="profileRightbarFollowingUser">Mahima Akter Mou</span>
           </div>
           <div className="profileRightbarFollowing">
-            <img src="/assets/person/rayin.jpg" alt="" className="profileRightbarFollowingImg" />
-            <span className="profileRightbarFollowingUser">SYed Rayin</span>
+            <img src={`${PF}/person/rayin.jpg`} alt="" className="profileRightbarFollowingImg" />
+            <span className="profileRightbarFollowingUser">SYed Rayin</span> 
           </div>
         </div>
       </>

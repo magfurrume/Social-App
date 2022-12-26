@@ -1,16 +1,20 @@
 import React from 'react';
 import "./topbar.css";
 import { Search, Chat, Notifications, Person } from '@material-ui/icons'
+import { Link } from 'react-router-dom';
 
 export default function Topbar() {
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     return (
         <div className='topbarContainer'>
             <div className="topbarLeft">
-                <span className='logo'>facebook</span>
+                <Link to="/" style={{ textDecoration: "none" }}>
+                    <span className='logo'>facebook</span>
+                </Link>
             </div>
             <div className="topbarCenter">
                 <div className="searchbar">
-                    <Search className='searchIcon'/>
+                    <Search className='searchIcon' />
                     <input placeholder='Search Facebook' className="searchInput" />
                 </div>
             </div>
@@ -33,8 +37,7 @@ export default function Topbar() {
                         <span className="topbarIconBadge">1</span>
                     </div>
                 </div>
-                <img src="/assets/person/pirsaheb.jpg" alt="" className="topbarImg" />
-
+                <img src={`${PF}/person/pirsaheb.jpg`} alt="" className="topbarImg" />
             </div>
 
         </div>
