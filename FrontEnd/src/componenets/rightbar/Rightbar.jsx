@@ -9,12 +9,15 @@ export default function Rightbar({ profile }) {
   const HomeRightBar = () => {
     return (
       <>
+        <h4 className="rightbarTitle">Sponsored</h4>
+        <img className='rightbarAd' src={`${PF}/ad.jpg`} alt="" />
+        <h4 className="rightbarTitle">Birthdays</h4>
         <div className="birthdayContainer">
           <img src="/assets/gift.png" alt="" className="birthdayImg" />
           <span className="birthdayText"><b>Ishmam</b> and <b>2 other friends</b> have birthday today</span>
         </div>
-        <img className='rightbarAd' src={`${PF}/ad.jpg`} alt="" />
-        <h4 className="rightbarTitle">Online Friends</h4>
+
+        <h4 className="rightbarTitle">Contacts</h4>
         <ul className="rightbarFriendList">
           {
             Users.map(u => (
@@ -72,7 +75,7 @@ export default function Rightbar({ profile }) {
           </div>
           <div className="profileRightbarFollowing">
             <img src={`${PF}/person/rayin.jpg`} alt="" className="profileRightbarFollowingImg" />
-            <span className="profileRightbarFollowingUser">SYed Rayin</span> 
+            <span className="profileRightbarFollowingUser">SYed Rayin</span>
           </div>
         </div>
       </>

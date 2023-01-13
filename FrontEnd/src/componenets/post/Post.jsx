@@ -31,7 +31,8 @@ export default function Post({ post }) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img src={PF+user.profilePicture ||  PF+"person/noAvater.png"} alt="" className="postProfileImg" />
+                        {/* <img src={PF+user.profilePicture ||  PF+"person/noAvater.png"} alt="" className="postProfileImg" /> */}
+                        <img src={PF+user.profilePicture} alt="" className="postProfileImg" />
                         <span className="postUsername">{user.userName}</span>
                         <span className="postDate">{post.date}</span>
                     </div>
@@ -47,7 +48,7 @@ export default function Post({ post }) {
                     <div className="postBottomLeft">
                         <img className="postLike" src="/assets/like.png" onClick={likeHandler} alt="" />
                         <img className="postLike" src="/assets/heart.png" onClick={likeHandler} alt="" />
-                        <span className="postLikeCounter">{isliked ? ` You and ${like} People liked this` : `${like}People liked this`}</span>
+                        <span className="postLikeCounter">{isliked ? ` You and ${like} People liked this` : ` ${like} People liked this`}</span>
                     </div>
                     <div className="postBottomRight">
                         <span className="postCommentText">{post.comment} Comments</span>
