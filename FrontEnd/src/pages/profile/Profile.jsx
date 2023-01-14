@@ -3,9 +3,22 @@ import Topbar from '../../componenets/topbar/Topbar';
 import Sidebar from '../../componenets/sidebar/Sidebar';
 import Feed from '../../componenets/feed/Feed';
 import Rightbar from '../../componenets/rightbar/Rightbar';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from "axios";
 
 export default function Profile() {
+    const [user, setUser] = useState({});
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const ress = await axios.get(`http://localhost:8800/api/users?username=Magfur%20Rume`);
+            console.log(ress.data)
+            setUser(ress.data)
+        }
+        fetchUser();
+    }, [])
     return (
         <>
             <Topbar />
@@ -18,12 +31,12 @@ export default function Profile() {
                             <img src={`${PF}/person/rume.jpg`} alt="" className="profileUserImg" />
                         </div>
                         <div className="profileInfo">
-                            <h4 className="profileInfoName">Magfur Rume</h4>
-                            <span className="profileInfoDesc">Hello My Friends</span>
+                            <h4 className="profileInfoName">{user.userName}</h4>
+                            <span className="profileInfoDesc">{user.desc}</span>
                         </div>
                     </div>
                     <div className="profileRightBottom">
-                        <Feed />
+                        <Feed username="Ishmam"/>
                         <Rightbar profile />
                     </div>
                 </div>
