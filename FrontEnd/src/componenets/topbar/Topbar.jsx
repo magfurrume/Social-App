@@ -1,6 +1,6 @@
 import React from 'react';
 import "./topbar.css";
-import { Search, Chat, Notifications, Person } from '@material-ui/icons'
+import { Search, Chat, Notifications, Person, ExpandMore } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 
 export default function Topbar() {
@@ -19,27 +19,35 @@ export default function Topbar() {
                 </div>
             </div>
             <div className="topbarRight">
-                {/* <div className="topbarLink">
+                <div className="topbarRightContent">
+
+                    {/* <div className="topbarLink">
                     <span className="topbarLinks">Homepage</span>
                     <span className="topbarLinks">TimeLine</span>
                 </div> */}
-                <div className="topbarIcons">
-                    <div className="topbarIconItem">
-                        <Person />
+                    <div className="topbarIcons">
+                        {/* <div className="topbarIconItem">
+                        <Person /> Friend Request Notification 
                         <span className="topbarIconBadge">1</span>
+                    </div> */}
+                        <div className="topbarIconItem">
+                            {/* <Chat /> */}
+                            <img src={`${PF}/icon/messenger.png`} alt="" className="topbarImg" />
+                            <span className="topbarIconBadge">1</span>
+                        </div>
+                        <div className="topbarIconItem">
+                            <img src={`${PF}/icon/bell-ring.png`} alt="" className="topbarImg" />
+                            <span className="topbarIconBadge">1</span>
+                        </div>
                     </div>
-                    <div className="topbarIconItem">
-                        <Chat />
-                        <span className="topbarIconBadge">1</span>
+                    <div className="topbarAccount">
+                        <img src={`${PF}/person/pirsaheb.jpg`} alt="" className="topbarAccountImg" />
+                        <span className="topbarAccountBadge"><ExpandMore /></span>
                     </div>
-                    <div className="topbarIconItem">
-                        <Notifications />
-                        <span className="topbarIconBadge">1</span>
-                    </div>
-                </div>
-                <img src={`${PF}/person/pirsaheb.jpg`} alt="" className="topbarImg" />
-            </div>
 
+                </div>
+
+            </div>
         </div>
     )
 }

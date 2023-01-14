@@ -4,8 +4,12 @@
     overflow-y: scroll;
     top: 50px;
     position: sticky;
+    overflow: hidden;
 }
 
+.sidebar:hover {
+    overflow-y: scroll;
+  }
 ::-webkit-scrollbar {
     width: 5px;
 }
