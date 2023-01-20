@@ -4,13 +4,22 @@ import { MoreVert } from '@material-ui/icons';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-import { format } from 'timeago.js';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+import dateFormat from "dateformat";
+import getAverageColor from "get-average-color";
+
+
+
+TimeAgo.addDefaultLocale(en);
+const timeAgo = new TimeAgo('en-US')
 
 export default function Post({ post }) {
     const [like, setLike] = useState(post.likes.length);
     const [isliked, setIsLiked] = useState(false);
     const [user, setUser] = useState({});
+    const [imgbgColor, setImgBgColor] = useState();
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 
@@ -20,6 +29,17 @@ export default function Post({ post }) {
             setUser(res.data)
         }
         fetchUser();
+
+        //    const getImgColor = (ImgSrc) => {
+        getAverageColor(PF + post.img).then((rgb) => {
+            if (rgb != undefined) {
+                setImgBgColor(rgb);
+                //   console.log(rgb);
+            }
+
+        })
+        //    }
+
     }, [post.userId])
 
 
@@ -33,11 +53,41 @@ export default function Post({ post }) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <Link to= {`/profile/${user.userName}`}>
-                            <img src={PF + user.profilePicture} alt="" className="postProfileImg" />
+                        <Link to={`/profile/${user.userName}`}>
+                            {/* <img src={PF + user.profilePicture} alt="" className="postProfileImg" style={imgbgColor !== undefined ? { backgroundColor: `rgb(${imgbgColor.r},${imgbgColor.g}, ${imgbgColor.b})`}: { backgroundColor: 'black'}}/> */}
+                            <img src={PF + user.profilePicture} alt="" className="postProfileImg" style={{ background: '#000' }} />
                         </Link>
-                        <span className="postUsername">{user.userName}</span>
-                        <span className="postDate">{format(post.createdAt)}</span>
+                        <div className='postInfo'>
+                            <div className="profileName">
+                                <span className="postUsername">{user.userName}</span>
+                            </div>
+                            <div className='datePrivacy'>
+                                <span className="postDate">
+                                    {(timeAgo.format(new Date(Date.parse(post.createdAt)), 'mini'))}
+                                    <span className='dateTooltip'>{dateFormat(post.createdAt, "dddd, mmmm d, yyyy, h:MM:ss TT")}</span>
+                                </span>
+                                <span><img src={PF + 'icon/dot.png'} alt="" className="privacyIcon" /></span>
+
+                                <span className='privacyTooltipDiv' title={'Shared with '
+                                    + (post.privacy === 1 ? 'Custom'
+                                        : post.privacy === 2 ? 'Friends'
+                                            : 'Public')} >
+                                    <img src={
+                                        post.privacy === 1 ? PF + 'icon/gear.png'
+                                            : post.privacy === 2 ? PF + 'icon/people.png'
+                                                : PF + 'icon/global.png'
+                                    } alt="" className="privacyIcon" />
+
+                                    <span className='privacyTooltip'>
+                                        {post.privacy === 1 ? 'Custom'
+                                            : post.privacy === 2 ? 'Friends'
+                                                : 'Public'}
+                                    </span>
+
+                                </span>
+                            </div>
+                        </div>
+
                     </div>
                     <div className="postTopRight">
                         <MoreVert />
@@ -45,7 +95,7 @@ export default function Post({ post }) {
                 </div>
                 <div className="postCenter">
                     <span className="postText">{post?.desc}</span>
-                    <img src={PF + post.img} alt="" className="postImg" />
+                    <img src={PF + post.img} alt="" className="postImg" style={imgbgColor !== undefined ? { backgroundColor: `rgba(${imgbgColor.r},${imgbgColor.g}, ${imgbgColor.b}, 0.5)` } : { backgroundColor: 'black' }} />
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">

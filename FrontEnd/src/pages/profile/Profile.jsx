@@ -13,9 +13,9 @@ export default function Profile() {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const ress = await axios.get(`http://localhost:8800/api/users?username=Magfur%20Rume`);
-            console.log(ress.data)
-            setUser(ress.data)
+            const res = await axios.get(`http://localhost:8800/api/users?username=Nahidul%20Islam%20Neon`);
+            console.log(res);
+            setUser(res.data)
         }
         fetchUser();
     }, [])
@@ -28,7 +28,7 @@ export default function Profile() {
                     <div className="profileRightTop">
                         <div className="profileCover">
                             <img src={`${PF}/post/1.jpg`} alt="" className="profileCoverImg" />
-                            <img src={`${PF}/person/rume.jpg`} alt="" className="profileUserImg" />
+                            <img src={`${PF}${user.profilePicture}`} alt="" className="profileUserImg" />
                         </div>
                         <div className="profileInfo">
                             <h4 className="profileInfoName">{user.userName}</h4>

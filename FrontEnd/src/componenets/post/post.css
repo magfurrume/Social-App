@@ -35,37 +35,101 @@
     margin: 0 10px;
 }
 
+.datePrivacy {
+    display: flex;
+    margin: 0 10px;
+}
+
+.datePrivacy span {
+    display: flex;
+    align-items: center;
+}
+
+
+
+
 .postDate {
     font-size: 12px;
+    display: inline-block;
+    align-items: center;
+}
+
+.postDate:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.dateTooltip {
+    visibility: hidden;
+    position: absolute;
+    padding: 8px 5px;
+    border-radius: 5px;
+    background-color: black;
+    opacity: .8;
+    color: white;
+    z-index: 1;
+    margin-left: -55px;
+    margin-top: 55px;
+}
+
+.privacyTooltip{
+    visibility: hidden;
+    position: absolute;
+    padding: 8px 10px;
+    border-radius: 5px;
+    background-color: black;
+    opacity: .8;
+    color: white;
+    z-index: 1;
+    margin-top: -55px;
+    font-size: 10px;
+}
+
+.postDate:hover .dateTooltip, .privacyTooltipDiv:hover .privacyTooltip {
+    visibility: visible;
+}
+
+.privacyIcon {
+    width: 12px;
+    height: 12px;
+    object-fit: contain;
+    opacity: 0.7;
+
 }
 
 .postCenter {
     margin: 20px 0;
 }
-.postImg{
+
+.postImg {
     margin-top: 20px;
     width: 100%;
     max-height: 500px;
     object-fit: contain;
 }
-.postBottom{
+
+.postBottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.postBottomLeft{
+
+.postBottomLeft {
     display: flex;
     align-items: center;
 }
-.postLike{
+
+.postLike {
     width: 24px;
     height: 24px;
     cursor: pointer;
 }
-.postLikeCounter{
+
+.postLikeCounter {
     font-size: 15px;
 }
-.postCommentText{
+
+.postCommentText {
     cursor: pointer;
     border-bottom: 1px dashed gray;
     font-size: 15px;

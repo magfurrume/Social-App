@@ -17,6 +17,11 @@ const PostSchema = new mongoose.Schema({
         type: Array,
         default: [],
 
+    },
+    privacy: {
+        type: Number,
+        enum: [1, 2, 3]
+
     }
 },
     { timestamps: true }
