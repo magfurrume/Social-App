@@ -28,8 +28,8 @@ export default function Profile() {
                 <div className="profileRight">
                     <div className="profileRightTop">
                         <div className="profileCover">
-                            <img src={PF+user.coverPicture || PF+ user.profilePicture} alt="" className="profileCoverImg" />
-                            <img src={`${PF}${user.profilePicture}`} alt="" className="profileUserImg" />
+                            <img src={user.coverPicture ? PF + user.coverPicture : PF + 'cover/noCover.jpg'} alt="" className="profileCoverImg" />
+                            <img src={user.profilePicture ? PF + user.profilePicture : PF + 'person/noAvater.png'} alt="" className="profileUserImg" />
                         </div>
                         <div className="profileInfo">
                             <h4 className="profileInfoName">{user.userName}</h4>
@@ -37,7 +37,7 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className="profileRightBottom">
-                        <Feed username={username}/>
+                        <Feed username={username} />
                         <Rightbar user={user} />
                     </div>
                 </div>

@@ -14,7 +14,7 @@ export default function Rightbar({ user }) {
         <img className='rightbarAd' src={`${PF}/ad.jpg`} alt="" />
         <h4 className="rightbarTitle">Birthdays</h4>
         <div className="birthdayContainer">
-          <img src="/assets/gift.png" alt="" className="birthdayImg" />
+          <img src={PF + "gift.png"} alt="" className="birthdayImg" />
           <span className="birthdayText"><b>Ishmam</b> and <b>2 other friends</b> have birthday today</span>
         </div>
 

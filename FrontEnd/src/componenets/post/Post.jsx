@@ -9,11 +9,14 @@ import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import dateFormat from "dateformat";
 import getAverageColor from "get-average-color";
+import { useContext } from 'react';
+import { AuthContext } from "../../context/AuthContext";
 
 
 
 TimeAgo.addDefaultLocale(en);
-const timeAgo = new TimeAgo('en-US')
+const timeAgo = new TimeAgo('en-US');
+
 
 export default function Post({ post }) {
     const [like, setLike] = useState(post.likes.length);
@@ -21,6 +24,11 @@ export default function Post({ post }) {
     const [user, setUser] = useState({});
     const [imgbgColor, setImgBgColor] = useState();
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const { user: currentUser } = useContext(AuthContext);
+
+    useEffect(() => {
+        setIsLiked(post.likes.includes(currentUser._id))
+    }, [post.likes, currentUser._id])
 
 
     useEffect(() => {
@@ -30,20 +38,22 @@ export default function Post({ post }) {
         }
         fetchUser();
 
-        //    const getImgColor = (ImgSrc) => {
         getAverageColor(PF + post.img).then((rgb) => {
             if (rgb != undefined) {
                 setImgBgColor(rgb);
-                //   console.log(rgb);
             }
 
         })
-        //    }
 
     }, [post.userId])
 
 
     const likeHandler = () => {
+        try {
+            axios.put("/posts/" + post._id + "/like", { userId: currentUser._id })
+        } catch (err) {
+
+        }
         setLike(isliked ? like - 1 : like + 1);
         setIsLiked(!isliked);
     };
@@ -55,7 +65,7 @@ export default function Post({ post }) {
                     <div className="postTopLeft">
                         <Link to={`/profile/${user.userName}`}>
                             {/* <img src={PF + user.profilePicture} alt="" className="postProfileImg" style={imgbgColor !== undefined ? { backgroundColor: `rgb(${imgbgColor.r},${imgbgColor.g}, ${imgbgColor.b})`}: { backgroundColor: 'black'}}/> */}
-                            <img src={PF + user.profilePicture} alt="" className="postProfileImg" style={{ background: '#000' }} />
+                            <img src={user.profilePicture ? PF + user.profilePicture : PF + 'person/noAvater.png'} F alt="" className="postProfileImg" style={{ background: '#000' }} />
                         </Link>
                         <div className='postInfo'>
                             <div className="profileName">
@@ -99,8 +109,8 @@ export default function Post({ post }) {
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <img className="postLike" src="/assets/like.png" onClick={likeHandler} alt="" />
-                        <img className="postLike" src="/assets/heart.png" onClick={likeHandler} alt="" />
+                        <img className="postLike" src={PF + "like.png"} onClick={likeHandler} alt="" />
+                        <img className="postLike" src={PF + "heart.png"} onClick={likeHandler} alt="" />
                         <span className="postLikeCounter">{isliked ? ` You and ${like} People liked this` : ` ${like} People liked this`}</span>
                     </div>
                     <div className="postBottomRight">
