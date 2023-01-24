@@ -54,18 +54,18 @@ app.use(helmet());
 app.use(morgan("common"));
 
 const storage = multer.diskStorage({
-    
-    destination: (req, file, cb) => {
+
+    destination: (req, file, cb) => { 
         cb(null, "public/assets");
     },
     filename: (req, file, cb) => {
         // cb(null, file.originalname);
 
-        cb(null, file.originalname);
+        cb(null, req.body.name);
 
     }
 })
-const upload = multer({ storage });
+const upload = multer({ storage, preservePath: true });
 
 app.post("/api/posts/upload", upload.single("file"), (req, res) => {
 
