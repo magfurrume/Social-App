@@ -80,7 +80,8 @@
     margin-bottom: 10px;
     cursor: pointer;
 }
-.profileRightbarFollowingUser{
+
+.profileRightbarFollowingUser {
     max-width: 80px;
     text-align: center;
     font-size: 12px;
@@ -92,4 +93,23 @@
     height: 90px;
     object-fit: cover;
     border-radius: 5px;
+}
+
+.rightbarFollowButton {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1872f2;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.rightbarFollowButton:focus {
+    outline: none;
 }
