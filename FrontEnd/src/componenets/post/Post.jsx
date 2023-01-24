@@ -24,6 +24,7 @@ export default function Post({ post }) {
     const [user, setUser] = useState({});
     const [imgbgColor, setImgBgColor] = useState();
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const API_CALL = process.env.REACT_APP_BACKEND_API;
     const { user: currentUser } = useContext(AuthContext);
 
     useEffect(() => {
@@ -33,7 +34,7 @@ export default function Post({ post }) {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const res = await axios.get(`http://localhost:8800/api/users?userId=${post.userId}`);
+            const res = await axios.get(API_CALL + `users?userId=${post.userId}`);
             setUser(res.data)
         }
         fetchUser();
@@ -50,7 +51,7 @@ export default function Post({ post }) {
 
     const likeHandler = () => {
         try {
-            axios.put("/posts/" + post._id + "/like", { userId: currentUser._id })
+            axios.put(API_CALL + "posts/" + post._id + "/like", { userId: currentUser._id })
         } catch (err) {
 
         }

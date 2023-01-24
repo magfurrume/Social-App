@@ -4,6 +4,7 @@ import "./register.css";
 import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
+    const API_CALL = process.env.REACT_APP_BACKEND_API;
     const username = useRef();
     const email = useRef();
     const password = useRef();
@@ -21,7 +22,7 @@ export default function Register() {
                 password: password.current.value,
             };
             try {
-                await axios.post("auth/register", user);
+                await axios.post(API_CALL +"auth/register", user);
                 navigate("/login")
             } catch (err) {
                 console.log(err);

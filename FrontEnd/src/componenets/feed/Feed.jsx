@@ -10,14 +10,15 @@ import { AuthContext } from "../../context/AuthContext";
 
 
 export default function Feed({ username }) {
+  const API_CALL = process.env.REACT_APP_BACKEND_API;
   const [post, setPost] = useState([]);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchPost = async () => {
       const res = username
-        ? await axios.get("http://localhost:8800/api/posts/profile/" + username)
-        : await axios.get("posts/timeline/" + user._id)
+        ? await axios.get(API_CALL + "posts/profile/" + username)
+        : await axios.get(API_CALL + "posts/timeline/" + user._id)
       setPost(res.data)
     }
     fetchPost();

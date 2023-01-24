@@ -10,6 +10,7 @@ import axios from 'axios';
 
 export default function Share() {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const API_CALL = process.env.REACT_APP_BACKEND_API;
     const { user } = useContext(AuthContext);
     const desc = useRef();
     const [file, setFile] = useState(null);
@@ -27,11 +28,11 @@ export default function Share() {
             data.append("file", file);
             newPost.img = fileName;
             try {
-                await axios.post("/posts/upload", data);
+                await axios.post(API_CALL + "posts/upload", data);
             } catch (err) { }
         }
         try {
-            await axios.post("/posts", newPost);
+            await axios.post(API_CALL + "posts", newPost);
             window.location.reload();
         } catch (err) { }
     };
