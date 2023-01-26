@@ -4,10 +4,20 @@ import { Search, Chat, Notifications, Person, ExpandMore } from '@material-ui/ic
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
 export default function Topbar() {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    ////
+    const handleLogout = () => {
+        localStorage.clear();
+        navigate("/login")
+    };
+
+
+
     return (
         <div className='topbarContainer'>
             <div className="topbarLeft">
@@ -41,6 +51,9 @@ export default function Topbar() {
                         <div className="topbarIconItem">
                             <img src={`${PF}/icon/bell-ring.png`} alt="" className="topbarImg" />
                             <span className="topbarIconBadge">1</span>
+                        </div>
+                        <div className="topbarIconItem">
+                            <Notifications className="topbarImg" onClick={handleLogout} />
                         </div>
                     </div>
                     <div className="topbarAccount">

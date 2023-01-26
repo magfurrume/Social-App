@@ -15,8 +15,9 @@ export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const API_CALL = process.env.REACT_APP_BACKEND_API;
   const [friends, setFriends] = useState([]);
-  const { user: currentUser } = useContext(AuthContext);
+  const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(false);
+  
   // Follow Unfollow
   useEffect(() => {
 
@@ -27,21 +28,23 @@ export default function Rightbar({ user }) {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get(API_CALL + "users/friends/" + user._id)
+        const friendList = await axios.get(API_CALL + "users/friends/" + user?._id)
         setFriends(friendList.data);
       } catch (err) {
         console.log(err);
       }
     }
     getFriends();
-  }, [user?._id]); 
+  }, [user]);
 
   const folloHandler = async () => {
     try {
       if (followed) {
-        await axios.put(API_CALL + "users/" + user._id + "/follow", { userId: currentUser._id })
-      } else
         await axios.put(API_CALL + "users/" + user._id + "/unfollow", { userId: currentUser._id })
+        dispatch({ type: "UNFOLLOW", payload: user._id });
+      } else
+        await axios.put(API_CALL + "users/" + user._id + "/follow", { userId: currentUser._id })
+        dispatch({ type: "FOLLOW", payload: user._id });
 
     } catch (err) {
       console.log(err);
@@ -66,7 +69,7 @@ export default function Rightbar({ user }) {
           {
             Users.map(u => (
 
-              <Online key={u.id} user={u} /> 
+              <Online key={u.id} user={u} />
             ))
           }
         </ul>

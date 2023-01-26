@@ -31,7 +31,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     if (req.body.userId === req.params.id || req.body.isAdmin) {
         try {
-            console.log('hi');
+
             await User.findByIdAndDelete(req.params.id);
 
             res.json("Your Account Has Been Deleted");
@@ -112,6 +112,27 @@ router.put("/:id/unfollow", async (req, res) => {
 })
 
 
+// Search an user 
+// router.get('/search/:name', async (req, res) => {
+//     const query = req.params.name;
+//     await User.find({ $userName: { $search: query } }, (err, data) => {
+//         if (err) {
+//             res.status(500).send(err);
+//         } else {
+//             res.json(data);
+//         }
+//     });
+// });
+router.get('/search', (req, res) => {
+    const name = req.query.name;
+    User.find({userName: {$regex: name, $options: 'i'}}, (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.json(data);
+      }
+    });
+  });
 
 module.exports = router;
 
