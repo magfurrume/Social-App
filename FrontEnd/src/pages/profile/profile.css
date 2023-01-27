@@ -17,6 +17,26 @@
     object-fit: cover;
 }
 
+.profilePictureSection {
+    display: flex;
+
+}
+
+.profilePicChange {
+    position: relative;
+    align-content: center;
+    left: 52%;
+    top: -10px;
+}
+
+.uploadIcon {
+    padding: 5px;
+    background-color: rgb(235, 235, 235);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px !important;
+}
+
 .profileUserImg {
     width: 120px;
     height: 120px;

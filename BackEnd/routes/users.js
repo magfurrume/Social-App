@@ -14,7 +14,7 @@ router.put("/:id", async (req, res) => {
             } catch (err) { res.status(err) }
         }
         try {
-            // console.log('hi');
+            console.log(req.body);
             await User.findByIdAndUpdate(req.params.id, {
                 $set: req.body,
             });
@@ -125,14 +125,14 @@ router.put("/:id/unfollow", async (req, res) => {
 // });
 router.get('/search', (req, res) => {
     const name = req.query.name;
-    User.find({userName: {$regex: name, $options: 'i'}}, (err, data) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.json(data);
-      }
+    User.find({ userName: { $regex: name, $options: 'i' } }, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json(data);
+        }
     });
-  });
+});
 
 module.exports = router;
 

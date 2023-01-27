@@ -16,13 +16,9 @@ export default function Rightbar({ user }) {
   const API_CALL = process.env.REACT_APP_BACKEND_API;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
-  const [followed, setFollowed] = useState(false);
-  
-  // Follow Unfollow
-  useEffect(() => {
+  const [followed, setFollowed] = useState(currentUser.followings.includes(user?.id));
 
-    setFollowed(currentUser.followings.includes(user?._id))
-  }, [currentUser, user?._id]);
+
   // Fetch Friend List 
 
   useEffect(() => {
@@ -40,17 +36,19 @@ export default function Rightbar({ user }) {
   const folloHandler = async () => {
     try {
       if (followed) {
-        await axios.put(API_CALL + "users/" + user._id + "/unfollow", { userId: currentUser._id })
+        await axios.put(API_CALL + "users/" + user._id + "/unfollow", { userId: currentUser._id });
         dispatch({ type: "UNFOLLOW", payload: user._id });
-      } else
-        await axios.put(API_CALL + "users/" + user._id + "/follow", { userId: currentUser._id })
+      } else {
+        await axios.put(API_CALL + "users/" + user._id + "/follow", { userId: currentUser._id });
         dispatch({ type: "FOLLOW", payload: user._id });
+      }
 
     } catch (err) {
-      console.log(err);
     }
     setFollowed(!followed);
   }
+
+
 
 
   const HomeRightBar = () => {
@@ -77,9 +75,11 @@ export default function Rightbar({ user }) {
     )
   }
   const ProfileRightBar = () => {
+
     return (
       <>
         {user.userName !== currentUser.userName && (
+
           <button className="rightbarFollowButton" onClick={folloHandler}>
             {followed ? "Unfollow" : "Follow"}
             {followed ? <Remove /> : <Add />}
