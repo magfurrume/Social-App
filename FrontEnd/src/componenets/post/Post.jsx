@@ -1,6 +1,6 @@
 import React from 'react';
 import "./post.css";
-import { MoreVert } from '@material-ui/icons';
+import { MoreHoriz, Delete } from '@material-ui/icons';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -23,6 +23,7 @@ export default function Post({ post }) {
     const [isliked, setIsLiked] = useState(false);
     const [user, setUser] = useState({});
     const [imgbgColor, setImgBgColor] = useState();
+    const [isShown, setIsShown] = useState(false);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const API_CALL = process.env.REACT_APP_BACKEND_API;
     const { user: currentUser } = useContext(AuthContext);
@@ -58,7 +59,22 @@ export default function Post({ post }) {
         setLike(isliked ? like - 1 : like + 1);
         setIsLiked(!isliked);
     };
-    //    const findUser = user.filter((u) => u.id === post.userId); // Find user Along with post
+
+    const threeDotClickHandler = () => {
+        setIsShown(true);
+    };
+
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.delete(API_CALL + "posts/" + post._id, { data: { userId: currentUser._id } })
+            setIsShown(false);
+        } catch (err) {
+
+        }
+        window.location.reload();
+    }
+
     return (
         <div className='post'>
             <div className="postWrapper">
@@ -101,7 +117,17 @@ export default function Post({ post }) {
 
                     </div>
                     <div className="postTopRight">
-                        <MoreVert />
+                        <MoreHoriz onClick={threeDotClickHandler} />
+                        {isShown && (
+                            <div className="threedotContent">
+                                <div className="threeDotItem" >
+                                    <div className="threeDotItemIcon" onClick={(e) => handleDelete(e)}>
+                                        <Delete />
+                                    </div>
+                                    <span>Delete this post</span>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="postCenter">
@@ -122,3 +148,20 @@ export default function Post({ post }) {
         </div>
     )
 }
+
+// function ThreeDotElement() {
+//     const handleDelete = () => {
+//         console.log("rume");
+//         setIsShown(false);
+//     }
+//     return (
+//         <div className="threedotContent">
+//             <div className="threeDotItem" >
+//                 <div className="threeDotItemIcon" onClick={() => handleDelete()}>
+//                     <Delete />
+//                 </div>
+//                 <span>Delete this post</span>
+//             </div>
+//         </div>
+//     );
+// }

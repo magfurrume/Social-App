@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from "axios";
 import { useParams } from "react-router";
-import { CameraAlt } from '@material-ui/icons';
+import { CameraAlt, Cancel } from '@material-ui/icons';
 import { useContext } from 'react';
 import { AuthContext } from "../../context/AuthContext";
 
@@ -17,7 +17,7 @@ export default function Profile() {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const API_CALL = process.env.REACT_APP_BACKEND_API;
     const username = useParams().username;
-    const { user: currentUser } = useContext(AuthContext);
+    const { user: currentUser, dispatch } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -51,7 +51,9 @@ export default function Profile() {
                     userId: currentUser._id,
                     profilePicture: fileName
                 });
+                // dispatch({ type: "PROFILEPICTURE", payload: user.profilePicture });
                 window.location.reload();
+                // dispatch({ type: "PROFILEPICTURE", payload: user._id });
             } catch (err) { }
 
         }
@@ -71,14 +73,15 @@ export default function Profile() {
                             <img src={user.coverPicture ? PF + user.coverPicture : PF + 'cover/noCover.jpg'} alt="" className="profileCoverImg" />
                             <div className="profilePictureSection">
                                 <img src={user.profilePicture ? PF + user.profilePicture : PF + 'person/noAvater.png'} alt="" className="profileUserImg" />
-                                {/* {newProfileImg && (
-                                    <div className="shareImgContainer">
-                                        <img className="shareImg" src={URL.createObjectURL(file)} alt="" />
-                                        <Cancel className="shareCancelImg" onClick={() => setNewProfileimg(null)} />
-                                    </div>
-                                )} */}
+
                                 {(username === currentUser.userName) && (
                                     <>
+                                        {newProfileImg && (
+                                            <div className="shareImgContainer">
+                                                <img className="shareImg" src={URL.createObjectURL(newProfileImg)} alt="" />
+                                                <Cancel className="shareCancelImg" onClick={() => setNewProfileimg(null)} />
+                                            </div>
+                                        )}
                                         <form className="profilePicChange" onSubmit={uploadHandler}>
                                             <label htmlFor="file">
                                                 <CameraAlt htmlColor="black" className="uploadIcon" />
@@ -90,9 +93,11 @@ export default function Profile() {
                                                     onChange={(e) => setNewProfileimg(e.target.files[0])}
                                                 />
                                             </label>
-                                            <button className="shareButton" type="submit">
-                                                Share
-                                            </button>
+                                            {newProfileImg && (
+                                                <button className="shareButton" type="submit">
+                                                    Share
+                                                </button>
+                                            )}
                                         </form>
 
                                     </>

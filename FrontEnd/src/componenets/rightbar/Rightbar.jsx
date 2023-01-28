@@ -30,8 +30,11 @@ export default function Rightbar({ user }) {
         console.log(err);
       }
     }
-    getFriends();
-  }, [user]);
+//    if (Object.keys(user).length !== 0) {
+      getFriends();
+//    }
+
+  }, [user?._id]);
 
   const folloHandler = async () => {
     try {

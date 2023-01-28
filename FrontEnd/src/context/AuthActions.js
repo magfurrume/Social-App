@@ -15,9 +15,15 @@ export const LoginFailure = (error) => ({
 export const Follow = (userId) => ({
     type: "FOLLOW",
     payload: userId,
-  });
-  
-  export const Unfollow = (userId) => ({
+});
+
+export const Unfollow = (userId) => ({
     type: "UNFOLLOW",
     payload: userId,
-  });
+});
+
+export const ProfilePicture = (profilePicture) => ({
+    type: "PROFILEPICTURE",
+    payload: profilePicture,
+});
+
