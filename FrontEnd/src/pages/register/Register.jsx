@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRef } from "react";
 import "./register.css";
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function Register() {
     const API_CALL = process.env.REACT_APP_BACKEND_API;
@@ -22,7 +23,7 @@ export default function Register() {
                 password: password.current.value,
             };
             try {
-                await axios.post(API_CALL +"auth/register", user);
+                await axios.post(API_CALL + "auth/register", user);
                 navigate("/login")
             } catch (err) {
                 console.log(err);
@@ -72,10 +73,14 @@ export default function Register() {
 
                         <button className="loginButton" type="submit">Sign Up</button>
                         <hr className="LogingHr"></hr>
-                        <button className="loginRegisterButton">Log into Account</button>
+                        <Link to="/login" className="loginRegisterButton" ><span style={{ width: "100%" }}>Log into Account</span></Link>
                     </form>
                 </div>
+
             </div>
+            {/* <div className="copyRightSecltion">
+                <span>rume</span>
+            </div> */}
         </div>
     )
 }

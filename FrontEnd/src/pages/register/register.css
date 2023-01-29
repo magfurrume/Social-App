@@ -22,7 +22,8 @@
     flex-direction: column;
     justify-content: center;
 }
-.loginRight{
+
+.loginRight {
     margin-left: 100px;
 }
 
@@ -76,15 +77,17 @@
     font-weight: 500;
     cursor: pointer;
 }
-.loginForgot{
+
+.loginForgot {
     text-align: center;
     color: #1775ee;
 }
-.LogingHr{
+
+.LogingHr {
     border: 1px solid #dddfe2;
 }
 
-.loginRegisterButton{
+.loginRegisterButton {
     width: 70%;
     height: 50px;
     border-radius: 10px;
@@ -94,5 +97,9 @@
     color: white;
     font-weight: 500;
     cursor: pointer;
+    align-items: center;
     align-self: center;
+    display: flex;
+    text-align: center;
+    text-decoration: none;
 }

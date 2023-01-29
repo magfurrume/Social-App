@@ -30,9 +30,9 @@ export default function Rightbar({ user }) {
         console.log(err);
       }
     }
-//    if (Object.keys(user).length !== 0) {
-      getFriends();
-//    }
+    //    if (Object.keys(user).length !== 0) {
+    getFriends();
+    //    }
 
   }, [user?._id]);
 
@@ -107,7 +107,7 @@ export default function Rightbar({ user }) {
             <span className="profileRightbarInfoValue">{user.relationship === 1 ? "Single" : user.relationship === 2 ? "In a Relationship" : "Married"}</span>
           </div>
         </div>
-        <h4 className="profileRightbarTitle">User Friends</h4>
+        <h4 className="profileRightbarTitle"> Friends</h4>
         <div className="profileRightbarFollowings">
           {friends.map((friend) => (
             <Link

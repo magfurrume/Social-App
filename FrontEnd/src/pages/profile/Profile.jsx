@@ -13,7 +13,8 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function Profile() {
     const [user, setUser] = useState({});
-    const [newProfileImg, setNewProfileimg] = useState(null);
+    const [newProfileImg, setNewProfileImg] = useState(null);
+    const [newCoverImg, setNewCoverImg] = useState(null);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const API_CALL = process.env.REACT_APP_BACKEND_API;
     const username = useParams().username;
@@ -27,7 +28,7 @@ export default function Profile() {
         fetchUser();
     }, [username])
 
-    const uploadHandler = async (e) => {
+    const profilImgUploadHandler = async (e) => {
         e.preventDefault();
 
         const newPost = {
@@ -35,7 +36,6 @@ export default function Profile() {
             desc: 'desc.current.value',
         };
         if (newProfileImg) {
-
             const fileData = new FormData();
             const fileName = user._id + "_" + Date.now() + "_" + newProfileImg.name;
             fileData.append("name", fileName);
@@ -51,12 +51,37 @@ export default function Profile() {
                     userId: currentUser._id,
                     profilePicture: fileName
                 });
-                // dispatch({ type: "PROFILEPICTURE", payload: user.profilePicture });
+                dispatch({ type: "PROFILEPICTURE", payload: fileName });
                 window.location.reload();
-                // dispatch({ type: "PROFILEPICTURE", payload: user._id });
+                //  dispatch({ type: "PROFILEPICTURE", payload: user._id });
             } catch (err) { }
 
         }
+
+        if (newCoverImg) {
+            const fileData = new FormData();
+            const fileName = user._id + "_" + Date.now() + "_" + newCoverImg.name;
+            fileData.append("name", fileName);
+            fileData.append("file", newCoverImg);
+            newPost.img = fileName;
+
+            const profileData = new FormData();
+            profileData.append("userId", currentUser._id);
+            profileData.append("profilePicture", fileName)
+            try {
+                console.log(fileName);
+                await axios.post(API_CALL + "posts/upload", fileData);
+                await axios.put(API_CALL + "users/" + currentUser._id, {
+                    userId: currentUser._id,
+                    coverPicture: fileName
+                });
+                // dispatch({ type: "PROFILEPICTURE", payload: fileName });
+                window.location.reload();
+                //  dispatch({ type: "PROFILEPICTURE", payload: user._id });
+            } catch (err) { }
+
+        }
+
         // try {
         //     await axios.post(API_CALL + "posts", newPost);
         //     window.location.reload();
@@ -70,41 +95,65 @@ export default function Profile() {
                 <div className="profileRight">
                     <div className="profileRightTop">
                         <div className="profileCover">
-                            <img src={user.coverPicture ? PF + user.coverPicture : PF + 'cover/noCover.jpg'} alt="" className="profileCoverImg" />
-                            <div className="profilePictureSection">
-                                <img src={user.profilePicture ? PF + user.profilePicture : PF + 'person/noAvater.png'} alt="" className="profileUserImg" />
-
+                            <div>
+                                <img src={user.coverPicture ? PF + user.coverPicture : PF + 'cover/noCover.jpg'} alt="" className="profileCoverImg" />
                                 {(username === currentUser.userName) && (
                                     <>
-                                        {newProfileImg && (
-                                            <div className="shareImgContainer">
-                                                <img className="shareImg" src={URL.createObjectURL(newProfileImg)} alt="" />
-                                                <Cancel className="shareCancelImg" onClick={() => setNewProfileimg(null)} />
-                                            </div>
-                                        )}
-                                        <form className="profilePicChange" onSubmit={uploadHandler}>
-                                            <label htmlFor="file">
+                                        <form className="coverPicChange" onSubmit={profilImgUploadHandler}>
+                                            <label htmlFor="coverImgCng">
+                                                <CameraAlt htmlColor="black" className="coverChangeIcon" />
+                                                <span>Edit cover photo</span>
+                                                <input
+                                                    style={{ display: "none" }}
+                                                    type="file"
+                                                    id="coverImgCng"
+                                                    accept=".png,.jpeg,.jpg"
+                                                    onChange={(e) => setNewCoverImg(e.target.files[0])}
+                                                />
+                                            </label>
+                                            {newCoverImg && (
+                                                <div className="coverImgContainer">
+                                                    <img className="coverImg" src={URL.createObjectURL(newCoverImg)} alt="" />
+                                                    <Cancel className="profileCancelImg" onClick={() => setNewCoverImg(null)} />
+                                                    <button className="shareButton" type="submit">
+                                                        Upload
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </form>
+                                    </>
+                                )}
+                            </div>
+
+
+                            <div className="profilePictureSection">
+                                <img src={user.profilePicture ? PF + user.profilePicture : PF + 'person/noAvater.png'} alt="" className="profileUserImg" />
+                                {(username === currentUser.userName) && (
+                                    <>
+                                        <form className="profilePicChange" onSubmit={profilImgUploadHandler}>
+                                            <label htmlFor="profileImgCng">
                                                 <CameraAlt htmlColor="black" className="uploadIcon" />
                                                 <input
                                                     style={{ display: "none" }}
                                                     type="file"
-                                                    id="file"
+                                                    id="profileImgCng"
                                                     accept=".png,.jpeg,.jpg"
-                                                    onChange={(e) => setNewProfileimg(e.target.files[0])}
+                                                    onChange={(e) => setNewProfileImg(e.target.files[0])}
                                                 />
                                             </label>
                                             {newProfileImg && (
-                                                <button className="shareButton" type="submit">
-                                                    Share
-                                                </button>
+                                                <div className="profileImgContainer">
+                                                    <img className="profileImg" src={URL.createObjectURL(newProfileImg)} alt="" />
+                                                    <Cancel className="profileCancelImg" onClick={() => setNewProfileImg(null)} />
+                                                    <button className="shareButton" type="submit">
+                                                        Upload
+                                                    </button>
+                                                </div>
                                             )}
                                         </form>
 
                                     </>
                                 )}
-
-
-
                             </div>
                         </div>
                         <div className="profileInfo">

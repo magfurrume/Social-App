@@ -17,9 +17,56 @@
     object-fit: cover;
 }
 
+.coverPicChange {
+    position: absolute;
+    width: 100%;
+    text-align: right;
+    top: 210px;
+    right: 10px;
+
+}
+
+.coverPicChange label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.534);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.coverPicChange span {
+    font-size: 14px;
+    padding-left: 5px;
+}
+
+.coverChangeIcon {
+    font-size: 20px !important;
+}
+
 .profilePictureSection {
     display: flex;
 
+}
+
+.coverImgContainer {
+    padding: 10px 20px 10px 20px;
+    position: relative;
+    width: 43%;
+    object-fit: cover;
+    right: 0;
+    left: 0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 16px -8px rgb(0 0 0 / 66%);
+    background-color: white;
+    text-align: center;
+    margin: 0 auto;
+    z-index: 2;
+    top: -181px;
+}
+
+.coverImg {
+    width: 100%;
 }
 
 .profilePicChange {
@@ -27,6 +74,8 @@
     align-content: center;
     left: 52%;
     top: -10px;
+    max-width: 35%;
+    z-index: 1;
 }
 
 .uploadIcon {
@@ -67,4 +116,32 @@
 
 .profileRightBottom {
     display: flex;
+}
+
+.profileImgContainer {
+    padding: 10px 20px 10px 20px;
+    position: relative;
+    width: 75%;
+    object-fit: cover;
+    left: -50%;
+    right: 0;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.66);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.66);
+    background-color: white;
+    text-align: center;
+    top: -40px;
+}
+
+.profileImg {
+    width: 100%;
+    object-fit: cover;
+}
+
+.profileCancelImg {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    opacity: 0.7;
 }

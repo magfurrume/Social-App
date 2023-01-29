@@ -87,7 +87,7 @@
     border: 1px solid #dddfe2;
 }
 
-.loginRegisterButton {
+.loginPageRegisterButton {
     width: 70%;
     height: 50px;
     border-radius: 10px;
@@ -97,7 +97,11 @@
     color: white;
     font-weight: 500;
     cursor: pointer;
+    align-items: center;
     align-self: center;
+    display: flex;
+    text-align: center;
+    text-decoration: none;
 }
 
 .celebrityPage {
