@@ -66,7 +66,8 @@ input.searchInput {
     flex: 3;
     color: white;
 }
-.topbarRightContent{
+
+.topbarRightContent {
     display: flex;
     margin-right: 20px;
     justify-content: flex-end;
@@ -122,11 +123,13 @@ input.searchInput {
     object-fit: cover;
     cursor: pointer;
 }
+
 .down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-  }
-  .topbarAccountBadge{
+}
+
+.topbarAccountBadge {
     height: 3px;
     width: 3px;
     background-color: #F0F2F2;
@@ -141,4 +144,39 @@ input.searchInput {
     align-items: center;
     justify-content: center;
     font-size: 12px;
-  }
+}
+
+.searchResultContainer {
+    position: absolute;
+    margin: 0 20px;
+    width: 40%;
+    display: flex;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.8);
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+
+.searchItem {
+    display: flex;
+    padding: 5px 0px;
+    align-items: center;
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.searchItem:hover {
+    background-color: rgb(150, 150, 150);
+    border-radius: 10px;
+}
+
+.searchImg {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding-right: 5px;
+}
